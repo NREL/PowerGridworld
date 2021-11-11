@@ -12,7 +12,10 @@ Env setup:
 ```
 conda create -n gridworld python=3.8 -y
 conda activate gridworld
-pip instal -e .
+
+git clone git@github.com:NREL/PowerGridworld.git
+cd PowerGridWorld
+pip install -e .
 pip install -r requirements.txt
 ```
 

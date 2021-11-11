@@ -49,4 +49,4 @@ jobs:
           pip install -r requirements.txt
  
       - name: Run pytests
-        run: pytest -v --cov-report=xml --color=yes tests/
+        run: pytest -v --color=yes tests/

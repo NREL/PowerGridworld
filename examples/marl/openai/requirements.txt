@@ -1,0 +1,5 @@
+opendssdirect.py
+gym==0.18.3
+tensorflow==1.8.0
+pandas==1.1.5
+matplotlib==3.3.4

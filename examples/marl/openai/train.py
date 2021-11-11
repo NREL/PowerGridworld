@@ -28,7 +28,7 @@ import tensorflow.contrib.layers as layers
 
 from gridworld.log import logger
 from gridworld.multiagent_env import MultiAgentEnv
-from gridworld.multiagent_env_openai_style import MultiagentEnvOpenAIStyle
+from gridworld.multiagent_list_interface_env import MultiAgentListInterfaceEnv
 from gridworld.scenarios.buildings import make_env_config
 
 logger.setLevel(logging.ERROR)
@@ -180,7 +180,7 @@ def make_env(arglist):
         num_buildings=3
     )
 
-    env = MultiagentEnvOpenAIStyle(
+    env = MultiAgentListInterfaceEnv(
         CoordinatedMultiBuildingControlEnv,
         env_config
     )

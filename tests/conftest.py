@@ -12,7 +12,7 @@ from gridworld.agents.energy_storage import EnergyStorageEnv
 from gridworld.agents.vehicles import EVChargingEnv
 from gridworld import MultiAgentEnv, MultiComponentEnv
 from gridworld.distribution_system import OpenDSSSolver
-# from gridworld.multiagent_env_openai_style import MultiagentEnvOpenAIStyle
+from gridworld.multiagent_list_interface_env import MultiAgentListInterfaceEnv
 
 
 ## Functions for running simply policy baselines ## 

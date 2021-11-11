@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         os: [ macOS-latest, ubuntu-latest ]
-        python-version: [ 3.6, 3.7, 3.8 ]
+        python-version: [ 3.7, 3.8, 3.9 ]
 
     steps:
     
@@ -48,5 +48,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
  
-      - name: Run tests
+      - name: Run pytests
         run: pytest -v --cov-report=xml --color=yes tests/

@@ -50,3 +50,6 @@ jobs:
  
       - name: Run pytests
         run: pytest -v --color=yes tests/
+
+      - name: Test notebooks
+        run: pytest -v --color=yes --nbmake examples/envs/

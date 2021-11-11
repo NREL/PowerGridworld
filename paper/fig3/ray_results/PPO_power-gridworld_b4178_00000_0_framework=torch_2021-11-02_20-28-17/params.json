@@ -1,0 +1,117 @@
+{
+  "batch_mode": "complete_episodes",
+  "eager_tracing": true,
+  "entropy_coeff": 0.0,
+  "env": "power-gridworld",
+  "env_config": {
+    "agents": [
+      {
+        "bus": "675c",
+        "cls": "<class 'gridworld.base.MultiComponentEnv'>",
+        "config": {
+          "components": [
+            {
+              "cls": "<class 'gridworld.building.five_zone_rom_env.FiveZoneROMThermalEnergyEnv'>",
+              "config": {
+                "rescale_spaces": true,
+                "reward_structure": {
+                  "alpha": 0.0
+                }
+              },
+              "name": "building"
+            },
+            {
+              "cls": "<class 'gridworld.pv.pv_profile_env.PVEnv'>",
+              "config": {
+                "profile_csv": "off-peak.csv",
+                "rescale_spaces": true,
+                "scaling_factor": 40.0
+              },
+              "name": "pv"
+            },
+            {
+              "cls": "<class 'gridworld.energy_storage.energy_storage_env.EnergyStorageEnv'>",
+              "config": {
+                "max_power": 20.0,
+                "rescale_spaces": true,
+                "storage_range": [
+                  3.0,
+                  250.0
+                ]
+              },
+              "name": "storage"
+            }
+          ]
+        },
+        "name": "building"
+      },
+      {
+        "bus": "675c",
+        "cls": "<class 'gridworld.scenarios.ieee_13_bus_heterogeneous.make_env_config.<locals>.ThisPVEnv'>",
+        "config": {
+          "grid_aware": true,
+          "profile_csv": "constant.csv",
+          "rescale_spaces": true,
+          "scaling_factor": 400.0
+        },
+        "name": "pv"
+      },
+      {
+        "bus": "675c",
+        "cls": "<class 'gridworld.vehicles.ev_charging_env.EVChargingEnv'>",
+        "config": {
+          "max_charge_rate_kw": 7.0,
+          "minutes_per_step": 5,
+          "num_vehicles": 25,
+          "peak_threshold": 200.0,
+          "rescale_spaces": true,
+          "vehicle_multiplier": 40.0
+        },
+        "name": "ev-charging"
+      }
+    ],
+    "common_config": {
+      "control_timedelta": "0 days 00:05:00",
+      "end_time": "08-13-2021 00:00:00",
+      "start_time": "08-12-2021 00:00:00"
+    },
+    "max_episode_steps": 250,
+    "open_dss_config": {
+      "feeder_file": "ieee_13_dss/IEEE13Nodeckt.dss",
+      "loadshape_file": "ieee_13_dss/annual_hourly_load_profile.csv",
+      "system_load_rescale_factor": 0.6
+    }
+  },
+  "framework": "torch",
+  "log_level": "WARN",
+  "lr": 0.0001,
+  "multiagent": {
+    "policies": {
+      "building": [
+        null,
+        "Dict(building:Box([-1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1. -1.], [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.], (15,), float64), pv:Box([-1.], [1.], (1,), float64), storage:Box([-1.], [1.], (1,), float64))",
+        "Dict(building:Box([-1. -1. -1. -1. -1. -1.], [1. 1. 1. 1. 1. 1.], (6,), float64), pv:Box([-1.], [1.], (1,), float64), storage:Box([-1.], [1.], (1,), float64))",
+        {}
+      ],
+      "ev-charging": [
+        null,
+        "Box([-1. -1. -1. -1. -1. -1.], [1. 1. 1. 1. 1. 1.], (6,), float64)",
+        "Box([-1.], [1.], (1,), float64)",
+        {}
+      ],
+      "pv": [
+        null,
+        "Box([-1. -1.], [1. 1.], (2,), float64)",
+        "Box([-1.], [1.], (1,), float64)",
+        {}
+      ]
+    },
+    "policy_mapping_fn": "<function main.<locals>.<lambda> at 0x2b0262c588b0>"
+  },
+  "num_gpus": 1,
+  "num_sgd_iter": 10,
+  "num_workers": 34,
+  "observation_filter": "MeanStdFilter",
+  "rollout_fragment_length": 250,
+  "train_batch_size": 8500
+}

@@ -2,12 +2,15 @@
 This example is modified from the original OpenAI MADDPG training script.
 Original script can be found below:
 https://github.com/openai/maddpg/blob/master/experiments/train.py
+
 To run this example, please make sure you have the OpenAI MADDPG installed,
-e.g., using "conda develop .". So, maddpg can be properly imported below.
+see README under examples/marl/openai for details.
+
 """
 
 import argparse
 import json
+import logging
 import os
 import random
 import uuid
@@ -23,9 +26,12 @@ import maddpg.common.tf_util as U
 from maddpg.trainer.maddpg import MADDPGAgentTrainer
 import tensorflow.contrib.layers as layers
 
-from gridworld.scenarios.buildings import make_env_config
+from gridworld.log import logger
 from gridworld.multiagent_env import MultiAgentEnv
 from gridworld.multiagent_env_openai_style import MultiagentEnvOpenAIStyle
+from gridworld.scenarios.buildings import make_env_config
+
+logger.setLevel(logging.ERROR)
 
 
 class CoordinatedMultiBuildingControlEnv(MultiAgentEnv):

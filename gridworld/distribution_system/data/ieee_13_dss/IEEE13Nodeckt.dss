@@ -1,0 +1,162 @@
+Clear 
+Set DefaultBaseFrequency=60
+
+!
+! This script is based on a script developed by Tennessee Tech Univ students
+! Tyler Patton, Jon Wood, and David Woods, April 2009
+!
+
+new circuit.IEEE13Nodeckt 
+~ basekv=115 pu=1.0001 phases=3 bus1=SourceBus  
+~ Angle=30                                                         ! advance angle 30 deg so result agree with published angle
+~ MVAsc3=20000 MVASC1=21000    ! stiffen the source to approximate inf source
+
+
+
+!SUB TRANSFORMER DEFINITION 
+! Although this data was given, it does not appear to be used in the test case results
+! The published test case starts at 1.0 per unit at Bus 650. To make this happen, we will change the impedance
+! on the transformer to something tiny by dividing by 1000 using the DSS in-line RPN math
+New Transformer.Sub Phases=3 Windings=2   XHL=(8 1000 /)
+~ wdg=1 bus=SourceBus   conn=delta  kv=115  kva=5000   %r=(.5 1000 /) 
+~ wdg=2 bus=650             conn=wye    kv=4.16  kva=5000   %r=(.5 1000 /)  
+
+! FEEDER 1-PHASE VOLTAGE REGULATORS
+! Define low-impedance 2-wdg transformer
+
+
+!TRANSFORMER DEFINITION 
+New Transformer.XFM1  Phases=3   Windings=2  XHL=2
+~ wdg=1 bus=633       conn=Wye kv=4.16    kva=500    %r=.55     XHT=1
+~ wdg=2 bus=634       conn=Wye kv=0.480    kva=500    %r=.55   XLT=1
+
+
+!LINE CODES
+redirect IEEELineCodes.dss
+
+// these are local matrix line codes
+// corrected 9-14-2011
+New linecode.mtx601 nphases=3 BaseFreq=60 
+~ rmatrix = (0.3465 | 0.1560 0.3375 | 0.1580 0.1535 0.3414 ) 
+~ xmatrix = (1.0179 | 0.5017 1.0478 | 0.4236 0.3849 1.0348 ) 
+~ units=mi 
+New linecode.mtx602 nphases=3 BaseFreq=60 
+~ rmatrix = (0.7526 | 0.1580 0.7475 | 0.1560 0.1535 0.7436 ) 
+~ xmatrix = (1.1814 | 0.4236 1.1983 | 0.5017 0.3849 1.2112 ) 
+~ units=mi 
+New linecode.mtx603 nphases=2 BaseFreq=60 
+~ rmatrix = (1.3238 | 0.2066 1.3294 ) 
+~ xmatrix = (1.3569 | 0.4591 1.3471 ) 
+~ units=mi 
+New linecode.mtx604 nphases=2 BaseFreq=60 
+~ rmatrix = (1.3238 | 0.2066 1.3294 ) 
+~ xmatrix = (1.3569 | 0.4591 1.3471 ) 
+~ units=mi 
+New linecode.mtx605 nphases=1 BaseFreq=60 
+~ rmatrix = (1.3292 ) 
+~ xmatrix = (1.3475 ) 
+~ units=mi 
+
+/*********** Original 606 Linecode *********************
+
+You have to use this to match Kersting's results:
+
+New linecode.mtx606 nphases=3 BaseFreq=60 
+~ rmatrix = (0.7982 | 0.3192 0.7891 | 0.2849 0.3192 0.7982 ) 
+~ xmatrix = (0.4463 | 0.0328 0.4041 | -0.0143 0.0328 0.4463 ) 
+~ Cmatrix = [257 | 0 257 | 0 0 257]  ! <--- This is too low by 1.5
+~ units=mi 
+
+Corrected mtx606  Feb 3 2016 by RDugan
+
+The new LineCode.606 is computed using the following CN cable definition and 
+LineGeometry definition:
+
+New CNDATA.250_1/3 k=13 DiaStrand=0.064 Rstrand=2.816666667 epsR=2.3
+~ InsLayer=0.220 DiaIns=1.06 DiaCable=1.16 Rac=0.076705 GMRac=0.20568 diam=0.573
+~ Runits=kft Radunits=in GMRunits=in
+
+New LineGeometry.606 nconds=3 nphases=3 units=ft
+~ cond=1 cncable=250_1/3 x=-0.5 h= -4
+~ cond=2 cncable=250_1/3 x=0   h= -4
+~ cond=3 cncable=250_1/3 x=0.5  h= -4
+
+****End Comment******/ 
+
+New Linecode.mtx606 nphases=3  Units=mi
+~ Rmatrix=[0.791721  |0.318476  0.781649  |0.28345  0.318476  0.791721  ]
+~ Xmatrix=[0.438352  |0.0276838  0.396697  |-0.0184204  0.0276838  0.438352  ]
+~ Cmatrix=[383.948  |0  383.948  |0  0  383.948  ]
+New linecode.mtx607 nphases=1 BaseFreq=60 
+~ rmatrix = (1.3425 ) 
+~ xmatrix = (0.5124 )
+~ cmatrix = [236] 
+~ units=mi 
+
+
+!LOAD DEFINITIONS 
+New Load.671 Bus1=671.1.2.3  Phases=3 Conn=Delta Model=1 kV=4.16   kW=1155 kvar=660 
+New Load.634a Bus1=634.1     Phases=1 Conn=Wye  Model=1 kV=0.277  kW=160   kvar=110 
+New Load.634b Bus1=634.2     Phases=1 Conn=Wye  Model=1 kV=0.277  kW=120   kvar=90 
+New Load.634c Bus1=634.3     Phases=1 Conn=Wye  Model=1 kV=0.277  kW=150   kvar=110
+New Load.645 Bus1=645.2       Phases=1 Conn=Wye  Model=1 kV=2.4      kW=170   kvar=125
+New Load.675a Bus1=675.1    Phases=1 Conn=Wye  Model=1 kV=2.4  kW=485   kvar=190 
+New Load.675b Bus1=675.2    Phases=1 Conn=Wye  Model=1 kV=2.4  kW=368   kvar=250
+New Load.675c Bus1=675.3    Phases=1 Conn=Wye  Model=1 kV=2.4  kW=290   kvar=212
+New Load.670a Bus1=670.1    Phases=1 Conn=Wye  Model=1 kV=2.4  kW=17    kvar=10 
+New Load.670b Bus1=670.2    Phases=1 Conn=Wye  Model=1 kV=2.4  kW=66    kvar=38 
+New Load.670c Bus1=670.3    Phases=1 Conn=Wye  Model=1 kV=2.4  kW=57  kvar=28
+New Load.684c Bus1=684.3    Phases=1 Conn=Wye  Model=1 kV=2.4  kW=0  kvar=0
+
+!CAPACITOR DEFINITIONS
+!New Capacitor.Cap1 Bus1=675 phases=3 kVAR=600 kV=4.16
+!New Capacitor.Cap2 Bus1=611.3 phases=1 kVAR=100 kV=2.4
+
+!Bus 670 is the concentrated point load of the distributed load on line 632 to 671 located at 1/3 the distance from node 632
+
+!LINE DEFINITIONS 
+New Line.650632    Phases=3 Bus1=650.1.2.3   Bus2=632.1.2.3  LineCode=mtx601 Length=2000 units=ft
+New Line.632670    Phases=3 Bus1=632.1.2.3    Bus2=670.1.2.3  LineCode=mtx601 Length=667  units=ft    
+New Line.670671    Phases=3 Bus1=670.1.2.3    Bus2=671.1.2.3  LineCode=mtx601 Length=1333 units=ft 
+New Line.671680    Phases=3 Bus1=671.1.2.3    Bus2=680.1.2.3  LineCode=mtx601 Length=1000 units=ft 
+New Line.632633    Phases=3 Bus1=632.1.2.3    Bus2=633.1.2.3  LineCode=mtx602 Length=500  units=ft 
+New Line.632645    Phases=2 Bus1=632.3.2      Bus2=645.3.2    LineCode=mtx603 Length=500  units=ft 
+New Line.645646    Phases=2 Bus1=645.3.2      Bus2=646.3.2    LineCode=mtx603 Length=300  units=ft 
+New Line.692675    Phases=3 Bus1=692.1.2.3    Bus2=675.1.2.3  LineCode=mtx606 Length=500  units=ft 
+New Line.671684    Phases=2 Bus1=671.1.3      Bus2=684.1.3    LineCode=mtx604 Length=300  units=ft 
+New Line.684611    Phases=1 Bus1=684.3        Bus2=611.3      LineCode=mtx605 Length=300  units=ft 
+New Line.684652    Phases=1 Bus1=684.1        Bus2=652.1      LineCode=mtx607 Length=800  units=ft
+
+
+!SWITCH DEFINITIONS 
+New Line.671692    Phases=3 Bus1=671   Bus2=692  Switch=y  r1=1e-4 r0=1e-4 x1=0.000 x0=0.000 c1=0.000 c0=0.000
+
+Set Voltagebases=[115, 4.16, .48]
+calcv
+Solve
+BusCoords IEEE13Node_BusXY.csv
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------
+!----------------Show some Results -----------------------------------------------------------------------------------------------------------------
+!---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// Show Voltages LN Nodes
+// Show Currents Elem
+// Show Powers kVA Elem
+// Show Losses
+// Show Taps
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------
+!---------------------------------------------------------------------------------------------------------------------------------------------------
+! Alternate Solution Script
+! To force the taps to be same as published results, set the transformer taps manually and disable the controls
+!---------------------------------------------------------------------------------------------------------------------------------------------------
+/*
+Transformer.Reg1.Taps=[1.0 1.0625]
+Transformer.Reg2.Taps=[1.0 1.0500]
+Transformer.Reg3.Taps=[1.0 1.06875]
+Set Controlmode=OFF
+
+Solve
+*/

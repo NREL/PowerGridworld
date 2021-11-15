@@ -4,7 +4,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("--env-name", default="buildings", type=str)
 parser.add_argument("--system-load-rescale-factor", default=0.6, type=float)
-parser.add_argument("--max-episode-steps", default=None, type=int)
+parser.add_argument("--max-episode-steps", default=250, type=int)
 parser.add_argument("--local-dir", default="~/ray_result", type=str)
 parser.add_argument("--stop-timesteps", default=int(1e10), type=int)
 parser.add_argument("--stop-iters", default=int(1e10), type=int)

@@ -15,4 +15,4 @@ python -u train.py \
 ```
 
 See the `examples/marl/rllib/README.md` for instructions on how to install
-`rllib` in your environment.
+`rllib` in your environment, and other tips for running RLLib training.

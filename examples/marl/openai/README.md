@@ -1,6 +1,10 @@
 The OpenAI code base has not been updated in recent years and
 uses older versions of Python and other dependencies.
 
+__There is a security vulnerability associated with the tensorflow version
+used in this example.  [See this pull request for details](https://github.com/NREL/PowerGridworld/pull/10) 
+-- run at your own risk!__
+
 This document walks through a end-to-end installation of PowerGridworld and 
 dependencies needed to run the MADDPG example.
 
@@ -20,13 +24,24 @@ cd PowerGridworld
 pip install -e .
 ``` 
 
+Update your environment for this example.  To do this, you must install
+the following packages (e.g., using `pip` directly, or by creating the
+appropriate `requirements.txt` file -- but see warning above!).
+
+```
+opendssdirect.py
+gym==0.18.3
+tensorflow==1.8.0
+pandas==1.1.5
+matplotlib==3.3.4
+```
+
 Next, we install our fork of MADDPG which is slightly modified from
 the original implementation to remove an unneeded dependency on
 the `multiagent` module.  We also install downgraded dependencies.
 
 ```
 cd examples/marl/openai
-pip install -r requirements.txt
 git clone https://github.com/zxymark221/maddpg.git
 cd maddpg
 pip install -e .

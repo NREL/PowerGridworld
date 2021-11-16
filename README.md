@@ -38,7 +38,8 @@ Examples of running various environments and MARL training algorithms can be fou
 ### Description
 
 Please read our [preprint on arXiv](https://arxiv.org/abs/2111.05969) for 
-more details.  
+more details.  Data and run scripts used to generate figures in the preprint 
+are available in the [`paper`](./paper) directory.
 
 ### Funding Acknowledgement
 

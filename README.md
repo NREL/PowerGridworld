@@ -10,6 +10,25 @@ Corresponding author:  [David Biagioni](https://github.com/davebiagioni)
 
 All authors are with the [National Renewable Energy Laboratory (NREL)](https://www.nrel.gov).
 
+### Description
+
+PowerGridworld provides users with a lightweight, modular, and customizable
+framework for creating power-systems-focused, multi-agent Gym
+environments that readily integrate with existing training frameworks for reinforcement learning (RL). Although many frameworks exist for training multi-agent RL (MARL) policies, none can rapidly prototype and develop the environments themselves,
+especially in the context of heterogeneous (composite, multidevice) power systems where power flow solutions are required to
+define grid-level variables and costs. PowerGridworld is an opensource software package that helps to fill this gap. To highlight
+PowerGridworld’s key features, we include two case studies
+and demonstrate learning MARL policies using both OpenAI’s
+multi-agent deep deterministic policy gradient (MADDPG) and
+RLLib’s proximal policy optimization (PPO) algorithms. In both
+cases, at least some subset of agents incorporates elements of the
+power flow solution at each time step as part of their reward
+(negative cost) structures.
+
+Please refer to our [preprint on arXiv](https://arxiv.org/abs/2111.05969) for 
+more details.  Data and run scripts used to generate figures in the preprint 
+are available in the [`paper`](./paper) directory.
+
 ### Basic installation instructions
 
 Env setup:
@@ -35,11 +54,6 @@ pytests --nbmake examples/envs
 
 Examples of running various environments and MARL training algorithms can be found in [`examples`](./examples).
 
-### Description
-
-Please read our [preprint on arXiv](https://arxiv.org/abs/2111.05969) for 
-more details.  Data and run scripts used to generate figures in the preprint 
-are available in the [`paper`](./paper) directory.
 
 ### Funding Acknowledgement
 
@@ -55,9 +69,8 @@ If citing this work, please use the following:
 ```bibtex
 @article{biagioni2021powergridworld,
   title={PowerGridworld: A Framework for Multi-Agent Reinforcement Learning in Power Systems},
-  author={Biagioni, David and Zhang, Xiangyu and Wald, Dylan and Vaidhynathan, Deepthi, and Chintala, Rohit and King, Jennifer and Zamzam, Ahmed S.},
+  author={Biagioni, David and Zhang, Xiangyu and Wald, Dylan and Vaidhynathan, Deepthi and Chintala, Rohit and King, Jennifer and Zamzam, Ahmed S},
   journal={arXiv preprint arXiv:2111.05969},
-  url={https://arxiv.org/abs/2111.05969},
   year={2021}
 }
 ```

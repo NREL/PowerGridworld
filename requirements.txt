@@ -2,7 +2,7 @@ gym==0.21.0
 jupyter==1.0.0
 matplotlib==3.4.3
 nbmake==0.10.0
-notebook==6.4.5
+notebook==6.4.10
 OpenDSSDirect.py==0.6.1
 pandas==1.3.4
 pytest==6.2.5

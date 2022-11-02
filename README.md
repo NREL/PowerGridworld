@@ -25,8 +25,8 @@ cases, at least some subset of agents incorporates elements of the
 power flow solution at each time step as part of their reward
 (negative cost) structures.
 
-Please refer to our [preprint on arXiv](https://arxiv.org/abs/2111.05969) for 
-more details.  Data and run scripts used to generate figures in the preprint 
+Please refer to our [published paper](https://dl.acm.org/doi/abs/10.1145/3538637.3539616) or [preprint on arXiv](https://arxiv.org/abs/2111.05969) for 
+more details.  Data and run scripts used to generate figures in the paper
 are available in the [`paper`](./paper) directory.
 
 ### Basic installation instructions
@@ -67,11 +67,22 @@ the Laboratory Directed Research and Development (LDRD) Program at NREL.
 If citing this work, please use the following:
 
 ```bibtex
-@article{biagioni2021powergridworld,
-  title={PowerGridworld: A Framework for Multi-Agent Reinforcement Learning in Power Systems},
-  author={Biagioni, David and Zhang, Xiangyu and Wald, Dylan and Vaidhynathan, Deepthi and Chintala, Rohit and King, Jennifer and Zamzam, Ahmed S},
-  journal={arXiv preprint arXiv:2111.05969},
-  year={2021}
+
+@inproceedings{biagioni2021powergridworld,
+  author = {Biagioni, David and Zhang, Xiangyu and Wald, Dylan and Vaidhynathan, Deepthi and Chintala, Rohit and King, Jennifer and Zamzam, Ahmed S.},
+  title = {PowerGridworld: A Framework for Multi-Agent Reinforcement Learning in Power Systems},
+  year = {2022},
+  isbn = {9781450393973},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3538637.3539616},
+  doi = {10.1145/3538637.3539616},
+  booktitle = {Proceedings of the Thirteenth ACM International Conference on Future Energy Systems},
+  pages = {565–570},
+  numpages = {6},
+  keywords = {deep learning, power systems, OpenAI gym, reinforcement learning, multi-agent systems},
+  location = {Virtual Event},
+  series = {e-Energy '22}
 }
 ```
 

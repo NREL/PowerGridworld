@@ -43,6 +43,8 @@ pip install -e .
 pip install -r requirements.txt
 ```
 
+We have also added a `pyproject.toml` file to support the use of [poetry](https://python-poetry.org/docs/).  If using poetry, simply do `poetry install`.
+
 Run the pytests to sanity check:
 
 ```

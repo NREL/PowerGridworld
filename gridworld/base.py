@@ -1,11 +1,10 @@
 from abc import ABC, abstractmethod
 from copy import deepcopy
-import logging
 from typing import Tuple, List, Dict
 
 import numpy as np
 
-import gym
+import gymnasium as gym
 
 from gridworld.log import logger
 

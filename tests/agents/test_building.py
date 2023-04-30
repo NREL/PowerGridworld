@@ -1,5 +1,4 @@
 from tests.conftest import single_agent_episode_runner
-from tests.agents.conftest import building_config
 
 from gridworld.agents.buildings import FiveZoneROMThermalEnergyEnv
 

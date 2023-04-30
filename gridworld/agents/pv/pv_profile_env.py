@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 
-import gym
+import gymnasium as gym
 
 from gridworld.log import logger
 from gridworld import ComponentEnv

@@ -4,15 +4,13 @@ import pandas as pd
 
 from tests.distribution_system.conftest import opendss_config
 
-import gym
+import gymnasium as gym
 
 from gridworld.agents.buildings import FiveZoneROMThermalEnergyEnv
 from gridworld.agents.pv import PVEnv
 from gridworld.agents.energy_storage import EnergyStorageEnv
-from gridworld.agents.vehicles import EVChargingEnv
 from gridworld import MultiAgentEnv, MultiComponentEnv
 from gridworld.distribution_system import OpenDSSSolver
-from gridworld.multiagent_list_interface_env import MultiAgentListInterfaceEnv
 
 
 ## Functions for running simply policy baselines ## 
@@ -99,7 +97,7 @@ def multi_agent_episode_runner(env):
 
 ## Fixtures for env creation ##
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def common_config():
     return {
         "start_time": "08-12-2020 00:00:00",
@@ -108,7 +106,7 @@ def common_config():
     }
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def pf_config(opendss_config):
     return {
         "cls": OpenDSSSolver,
@@ -116,7 +114,7 @@ def pf_config(opendss_config):
     }
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def multicomponent_building_config():
 
     building = {
@@ -152,3 +150,37 @@ def multicomponent_building_config():
     # Once the individual components are defined, we create a components list that
     # the multi-component agent will use to construct them internally.
     return [building, pv, storage]
+
+
+@pytest.fixture(scope="function")
+def ev_charging_config():
+    return {
+        "num_vehicles": 100,
+        "minutes_per_step": 5,
+        "max_charge_rate_kw": 7.,
+        "peak_threshold": 250.,
+        "vehicle_multiplier": 5.,
+        "rescale_spaces": False
+    }
+
+@pytest.fixture(scope="function")
+def pv_config():
+    return {
+        "name": "pv",
+        "profile_csv": "pv_profile.csv",
+        "scaling_factor": 10.
+    }
+
+
+@pytest.fixture(scope="function")
+def pv_array_config():
+    return {
+        "name": "pv",
+        "profile_csv": "pv_profile.csv",
+        "scaling_factor": 400.
+    }
+
+
+@pytest.fixture
+def energy_storage_config():
+    return {}

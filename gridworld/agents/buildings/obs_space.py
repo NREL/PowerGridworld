@@ -3,7 +3,7 @@ from collections import OrderedDict
 from typing import Union, Tuple
 
 import numpy as np
-import gym
+import gymnasium as gym
 
 
 ## DEFAULT BOUNDS for the observation space variables. Useful as reference.

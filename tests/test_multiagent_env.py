@@ -1,16 +1,11 @@
-from tests.conftest import (
-    common_config, multi_agent_episode_runner, pf_config, 
-    multicomponent_building_config
-)
-from tests.agents.conftest import (
-    ev_charging_config, pv_config, pv_array_config, energy_storage_config)
+from tests.conftest import multi_agent_episode_runner
 
 from gridworld import MultiAgentEnv, MultiComponentEnv
 from gridworld.agents.vehicles import EVChargingEnv
 from gridworld.agents.pv import PVEnv
 
 
-def test_ev_charging_multiagent_env(common_config, pf_config, ev_charging_config):
+def test_ev_charging_multiagent_env(common_config, ev_charging_config, pf_config):
     """Test multiagent env with 3 single-component EV charging agents."""
 
     agents = [
@@ -31,15 +26,11 @@ def test_ev_charging_multiagent_env(common_config, pf_config, ev_charging_config
 
     env = MultiAgentEnv(**env_config)
 
-    return multi_agent_episode_runner(env)
+    assert multi_agent_episode_runner(env)
 
 
 
-def test_multi_component_building_multiagent_env(
-    common_config, 
-    pf_config,
-    multicomponent_building_config
-):
+def test_multi_component_building_multiagent_env(common_config, pf_config, multicomponent_building_config):
     """Test multiagent env with three multi-component building agents."""
 
     agents = [
@@ -60,15 +51,15 @@ def test_multi_component_building_multiagent_env(
 
     env = MultiAgentEnv(**env_config)
 
-    return multi_agent_episode_runner(env)
+    assert multi_agent_episode_runner(env)
 
 
 def test_heterogeneous_multiagent_env(
+    multicomponent_building_config,
+    ev_charging_config,
+    pv_array_config,
     common_config,
     pf_config,
-    multicomponent_building_config,
-    pv_array_config,
-    ev_charging_config
 ):
     """Test multiagent env with three heterogeneous agents."""
 
@@ -104,4 +95,4 @@ def test_heterogeneous_multiagent_env(
 
     env = MultiAgentEnv(**env_config)
 
-    return multi_agent_episode_runner(env)
+    assert multi_agent_episode_runner(env)

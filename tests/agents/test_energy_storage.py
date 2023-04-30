@@ -1,5 +1,4 @@
 from tests.conftest import single_agent_episode_runner
-from tests.agents.conftest import energy_storage_config
 
 from gridworld.agents.energy_storage import EnergyStorageEnv
 

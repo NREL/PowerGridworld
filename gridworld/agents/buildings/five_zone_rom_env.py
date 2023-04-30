@@ -8,7 +8,7 @@ from typing import Tuple, Union
 import pandas as pd
 import numpy as np
 
-import gym
+import gymnasium as gym
 
 from gridworld.log import logger
 from gridworld import ComponentEnv

@@ -1,4 +1,4 @@
-gym==0.21.0
+gymnasium==0.28.1
 jupyter==1.0.0
 matplotlib==3.4.3
 nbmake==0.10.0
